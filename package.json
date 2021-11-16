@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
+  "name": "dashbox",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "a boxed up OSX dashboard",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
