@@ -72,5 +72,80 @@ footer {
       float: right;
       margin-right: 0; }
 
+.sticky {
+  background-color: transparent;
+  width: 215px;
+  height: 188px;
+  perspective: 1000px; }
+  .sticky .sticky-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d; }
+    .sticky .sticky-inner .front, .sticky .sticky-inner .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      top: 0; }
+      .sticky .sticky-inner .front button.i, .sticky .sticky-inner .back button.i {
+        position: absolute;
+        bottom: 10px;
+        right: 8px;
+        background: transparent;
+        border: none;
+        border-radius: 100%;
+        width: 13px;
+        height: 13px;
+        padding: 0;
+        text-align: center;
+        opacity: 0;
+        transition: opacity .5s; }
+        .sticky .sticky-inner .front button.i span, .sticky .sticky-inner .back button.i span {
+          font-family: Georga;
+          font-style: italic;
+          font-weight: 900;
+          font-size: 13px;
+          line-height: 8px;
+          position: absolute;
+          top: 3px;
+          right: 4px; }
+        .sticky .sticky-inner .front button.i:hover, .sticky .sticky-inner .back button.i:hover {
+          background: rgba(0, 0, 0, 0.25); }
+    .sticky .sticky-inner .front {
+      background-image: url(components/sticky/sticky.svg);
+      background-repeat: no-repeat;
+      color: black;
+      padding: 10px;
+      position: relative; }
+      .sticky .sticky-inner .front textarea {
+        background: transparent;
+        font-family: "Marker Felt", Markerfelt;
+        border: none;
+        resize: none;
+        font-size: 1.25rem;
+        width: 182px;
+        height: 159px; }
+        .sticky .sticky-inner .front textarea:focus, .sticky .sticky-inner .front textarea:focus-visible {
+          outline: none; }
+    .sticky .sticky-inner .back {
+      background-color: #2980b9;
+      color: white;
+      transform: rotateY(180deg);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); }
+  .sticky:hover .sticky-inner button.i {
+    opacity: 1; }
+  .sticky.flipped .sticky-inner {
+    transform: rotateY(180deg); }
+
 body {
   font-family: "Helvetica Neue"; }
+  body .workarea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 55px); }

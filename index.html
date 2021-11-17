@@ -8,6 +8,24 @@
     <title>Hello World!</title>
   </head>
   <body>
+    <div class="workarea">
+      <div class="sticky" id="sticky_1">
+        <div class="sticky-inner">
+          <div class="front">
+            <textarea>Welcome to dashbox</textarea>
+            <button class="i">
+              <span>i</span>
+            </button>
+          </div>
+          <div class="back">
+            backside
+            <button class="i">
+              <span>i</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <footer>
       <button class="plus">+</button>
       <button class="minus">-</button>
@@ -15,6 +33,7 @@
     </footer>
 
     <!-- You can also require other files to run in this process -->
+    <script src="components/sticky/sticky.js"></script>
     <script src="./renderer.js"></script>
   </body>
 </html>
