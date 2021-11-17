@@ -67,7 +67,14 @@ footer {
     font-size: 30px;
     line-height: .8;
     margin-right: 6px;
-    text-align: center; }
+    text-align: center;
+    position: relative; }
+    footer button span {
+      position: absolute;
+      top: -1px;
+      left: 5px; }
+    footer button.minus span {
+      left: 6px; }
     footer button.last {
       float: right;
       margin-right: 0; }

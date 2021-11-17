@@ -18,6 +18,17 @@ footer {
     line-height: .8;
     margin-right: 6px;
     text-align: center;
+    position: relative;
+    span {
+      position: absolute;
+      top: -1px;
+      left: 5px;
+    }
+    &.minus {
+      span {
+        left: 6px;
+      }
+    }
     &.last {
       float: right;
       margin-right: 0;
