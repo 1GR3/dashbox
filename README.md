@@ -1,5 +1,5 @@
-<img src="icon.png" align="right" width="256" height="256"/>
-# dashbox
+<img src="dashbox-icon.png" align="right" width="256" height="256"/>
+#dashbox
 
 
 **A boxed dashboard for new generations of MacOS.**
