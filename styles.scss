@@ -2,6 +2,15 @@
 @import "SCSS/_background.scss";
 @import "SCSS/_footer.scss";
 
+@import "components/sticky/sticky.scss";
+
 body {
   font-family: "Helvetica Neue";
+  .workarea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 55px);
+  }
 }
