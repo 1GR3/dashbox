@@ -5,10 +5,12 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <link href="./styles.css" rel="stylesheet">
-    <title>Hello World!</title>
+    <title>dashbox</title>
   </head>
   <body>
     <div class="workarea">
+      
+      
       <div class="sticky" id="sticky_1">
         <div class="sticky-inner">
           <div class="front">
@@ -18,15 +20,52 @@
             </button>
           </div>
           <div class="back">
-            backside
-            <br/>
-            <br/>
-            <button class="done">
-              <span>Done</span>
-            </button>
+            <div class="row colors">
+              <button class="color"></button>
+              <button class="color"></button>
+              <button class="color"></button>
+              <button class="color"></button>
+              <button class="color"></button>
+              <button class="color"></button>
+              <button class="color"></button>
+              <button class="color"></button>
+              <button class="color"></button>
+              <button class="color"></button>
+            </div>
+            <div class="row font">
+              <span>Font:</span>
+              <select name="family" id="family">
+                <option value="markerfelt">Marker Felt</option>
+                <option value="helvetica">Helvetica</option>
+                <option value="lucidagrande">Lucida Grande</option>
+                <option value="futura">Futura</option>
+                <option value="optima">Optima</option>
+                <option value="gillsans">Gill Sans</option>
+                <option value="baskerville">Baskerville</option>
+                <option value="americantypewriter">American Typewriter</option>
+              </select>
+              <select name="size" id="size">
+                <option value="auto">Auto</option>
+                <option value="auto">10</option>
+                <option value="auto">11</option>
+                <option value="auto">12</option>
+                <option value="auto">13</option>
+                <option value="auto">14</option>
+                <option value="auto">16</option>
+                <option value="auto">18</option>
+              </select>
+            </div>
+            <div class="row panel-footer">
+              <button class="done">
+                <span>Done</span>
+              </button>
+            </div>
+            
           </div>
         </div>
       </div>
+      
+      
     </div>
     <footer>
       <button class="plus"><span>+</span></button>
