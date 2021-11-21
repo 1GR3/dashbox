@@ -1,12 +1,26 @@
 <img src="dashbox-icon.png" align="right" width="256" height="256"/>
-#dashbox
 
+# dashbox
 
-**A boxed dashboard for new generations of MacOS.**
+**A  dashboard in the box for the new generations of MacOS.**
 
-Dashboard was introduced with Mac OS X 10.4, disabeld by default from OS X 10.10 Yosemite and finally removed in macOS 10.15 Catalina. For 11+ years it was a main app to run simple applications called widgets which included world clock, calcualtor, dictionary and all sort fo converters. These might come handy on daly basis to everyone who works on international level.
+Dashboard was introduced with Mac OS X 10.4, disabled by default from OS X 10.10 Yosemite and finally removed in macOS 10.15 Catalina. For 11+ years it was a main app to run simple applications called widgets which included world clock, calculator, dictionary and all sort of converters. These might come handy on daly basis to everyone who works on international level.
 
-**dashbox** is an attempt to preserve this functionality for the post-mojave versions of MacOS.
+## Goal
+
+**dashbox** is an attempt to preserve the functionality of dashboard app for the post-mojave versions of MacOS.
+
+It wont be an exact copy but rather a homage to dashboard app. The *look and feel* should be preserved but the details which have some room for improvement **should not** be blindly copied. 
+
+## Roadmap
+
+- [ ] Save the current state
+- [ ] Add sticky note
+- [ ] Add World Clock
+- [ ] Add Calculator
+    - [ ] Improve it by adding "scientific" functions on flip
+- [ ] Add converter app
+    - [ ] Improve it by adding tabs for categories instead of combobox
 
 ## Contribute
 
@@ -18,17 +32,14 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 
 ```bash
 # Clone this repository
-git clone https://github.com/electron/electron-quick-start
+git clone https://github.com/1GR3/dashbox
 # Go into the repository
-cd electron-quick-start
+cd dashbox
 # Install dependencies
 npm install
 # Run the app
 npm start
 ```
-
-Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
-
 
 
 ## License
