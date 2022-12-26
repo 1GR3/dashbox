@@ -12,11 +12,13 @@
   </head>
   <body>
     <div class="workarea">
+      <object draggable width="350" height="230"></object>
       <object
+        draggable
         type="text/html"
         data="./components/WorldClock/WorldClock.html"
-        width="350"
-        height="230"
+        width="175"
+        height="175"
       ></object>
       <!-- <object
         type="text/html"
@@ -30,12 +32,13 @@
         width="250"
         height="230"
       ></object> -->
-      <object
+      <!-- <object
         type="text/html"
         data="./components/sticky/sticky.html"
         width="250"
         height="230"
-      ></object>
+      ></object> -->
+      <article draggable="true">test</article>
     </div>
     <footer>
       <button class="plus"><span>+</span></button>
@@ -44,7 +47,7 @@
     </footer>
 
     <!-- You can also require other files to run in this process -->
-    <script src="components/sticky/sticky.js"></script>
+    <!-- <script src="components/sticky/sticky.js"></script> -->
     <script src="./renderer.js"></script>
   </body>
 </html>

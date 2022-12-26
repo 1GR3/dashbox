@@ -1,0 +1,14 @@
+{
+  "widget1": [
+    {
+      "number": 1,
+      "content": "content",
+      "font": "font",
+      "color": "color",
+      "position-x": 20,
+      "position-y": 300,
+      "size-x": 120,
+      "size-y": 300
+    }
+  ]
+}
