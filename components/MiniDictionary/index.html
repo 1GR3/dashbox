@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+        font-family: serif;
+        font-style: normal;
+        line-height: 14px;
+        font-size: 13px;
+      }
+
+      #front {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+      }
+
+      .linkovi_back {
+        position: absolute;
+        cursor: pointer;
+      }
+
+      #link_logo {
+        top: 165px;
+        left: 139px;
+        width: 24px;
+        height: 42px;
+      }
+
+      #link_verzija {
+        top: 190px;
+        left: 48px;
+        width: 48px;
+        height: 12px;
+      }
+
+      #link_naslov {
+        top: 58px;
+        left: 180px;
+        width: 98px;
+        height: 80px;
+      }
+
+      #note {
+        cursor: pointer;
+        position: absolute;
+        top: 25px;
+        left: 31px;
+        display: none;
+      }
+
+      #listanje {
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        opacity: 1;
+        display: none;
+      }
+
+      #podloga_front {
+        position: absolute;
+        top: 20px;
+      }
+
+      #zakrpa_lijevo {
+        position: absolute;
+        top: 44px;
+        left: 35px;
+      }
+
+      #zakrpa_desno {
+        position: absolute;
+        top: 44px;
+        left: 250px;
+      }
+
+      #zakrpa_gore {
+        position: absolute;
+        top: 37px;
+      }
+
+      #zakrpa_dolje {
+        position: absolute;
+        top: 185px;
+      }
+
+      #zakrpa_sredina {
+        position: absolute;
+        top: 40px;
+        left: 140px;
+      }
+
+      #podloga_back {
+        position: absolute;
+        top: 20px;
+        left: 2px;
+      }
+
+      #kartoncic {
+        position: absolute;
+        top: 5px;
+        left: 55px;
+        display: none;
+      }
+
+      #polje_ispis {
+        position: absolute;
+        top: 45px;
+        left: 3px;
+      }
+
+      #polje_ispis_provjera {
+        position: absolute;
+        top: -5px;
+        left: 100px;
+        text-align: center;
+        width: 100px;
+        background-color: white;
+        opacity: 0;
+      }
+
+      #polje_ispis_lijevo {
+        position: absolute;
+        left: 35px;
+        text-align: right;
+        width: 100px;
+        opacity: 0;
+      }
+
+      #polje_ispis_desno {
+        position: absolute;
+        left: 158px;
+        text-align: left;
+        width: 100px;
+        opacity: 0;
+      }
+
+      #polje_ispis_lijevo_area {
+        position: absolute;
+        top: -1px;
+        left: 39px;
+        text-align: right;
+        width: 100px;
+        background-color: transparent;
+        border: none;
+        overflow: hidden;
+        font-family: serif;
+        font-style: normal;
+        line-height: 14px;
+        font-size: 13px;
+        height: 150px;
+        display: none;
+      }
+
+      #polje_ispis_desno_area {
+        position: absolute;
+        top: -1px;
+        left: 153px;
+        text-align: left;
+        width: 100px;
+        background-color: transparent;
+        border: none;
+        overflow: hidden;
+        font-family: serif;
+        font-style: normal;
+        line-height: 14px;
+        font-size: 13px;
+        height: 150px;
+        display: none;
+      }
+
+      #upit {
+        position: absolute;
+      }
+
+      #polje {
+        position: absolute;
+        top: 30px;
+        left: 95px;
+        width: 108px;
+        text-align: center;
+      }
+
+      #infoButton {
+        position: absolute;
+        left: 193px;
+        top: 45px;
+        opacity: 0.75;
+      }
+
+      .info_trakica {
+        cursor: pointer;
+      }
+
+      #info_front {
+        position: absolute;
+        left: 135px;
+        top: 213px;
+      }
+
+      #info_back {
+        position: absolute;
+        left: 135px;
+        top: 215px;
+      }
+
+      #ani {
+        position: absolute;
+        left: 10px;
+        top: 90px;
+      }
+    </style>
+
+    <script src="../../scripts/AppleAnimator.js"></script>
+    <script src="../../scripts/AppleInfoButton.js"></script>
+    <title>Rječnik</title>
+  </head>
+
+  <body
+    onLoad="setTimeout('check_update_now()', 500);"
+    onBlur="polje_pomak('dolje');"
+    onClick="polje_pomak('gore'); document.getElementById('polje').focus();"
+    onMouseOver="info_trakica('pokazi')"
+    onMouseOut="info_trakica('sakrij')"
+  >
+    <div id="front" style="display: block; opacity: 0">
+      <img id="kartoncic" src="kartoncic.png" />
+      <div id="upit">
+        <input
+          id="polje"
+          type="text"
+          onKeyUp="if (event.keyCode==13) trazi();"
+          onKeyPress="this.style.backgroundColor=''; polje_pomak('gore'); provjera_unosa();"
+          style="border-width: 0px"
+        />
+      </div>
+      <img id="podloga_front" src="front.png" />
+      <div id="polje_ispis">
+        <a id="polje_ispis_lijevo">.</a>
+        <a id="polje_ispis_desno">.</a>
+        <a id="polje_ispis_provjera">.</a>
+        <textarea id="polje_ispis_lijevo_area"></textarea>
+        <textarea id="polje_ispis_desno_area"></textarea>
+      </div>
+      <img id="zakrpa_lijevo" src="zakrpa_lijevodesno.png" />
+      <img id="zakrpa_desno" src="zakrpa_lijevodesno.png" />
+      <img id="zakrpa_gore" src="zakrpa_goredolje.png" />
+      <img id="zakrpa_dolje" src="zakrpa_goredolje.png" />
+      <img id="zakrpa_sredina" src="zakrpa_sredina.png" />
+      <img id="listanje" src="listanje.gif" />
+      <img
+        id="info_front"
+        class="info_trakica"
+        src="i_trakica.png"
+        onClick="okreni_iza()"
+      />
+    </div>
+
+    <div id="back" style="display: block">
+      <img id="podloga_back" src="back.png" />
+      <div
+        id="link_verzija"
+        class="linkovi_back"
+        onClick="widget.openURL('http://www.minidictionary.info')"
+      ></div>
+      <div
+        id="link_naslov"
+        class="linkovi_back"
+        onClick="widget.openURL('http://www.minidictionary.info')"
+      ></div>
+      <div
+        id="link_logo"
+        class="linkovi_back"
+        onClick="widget.openURL('http://www.minidictionary.info')"
+      ></div>
+      <img
+        id="note"
+        src="note.png"
+        onClick="widget.openURL('http://www.minidictionary.info')"
+      />
+      <img
+        id="info_back"
+        class="info_trakica"
+        src="i_trakica.png"
+        onClick="okreni_naprijed()"
+      />
+    </div>
+  </body>
+
+  <script>
+    setTimeout("okreni_naprijed()", 2000);
+    setTimeout("check_update_onload()", 3000);
+
+    document.getElementById("polje_ispis_lijevo").innerHTML = "";
+    document.getElementById("polje_ispis_desno").innerHTML = "";
+    red_visina = document.getElementById("polje_ispis_provjera").offsetHeight;
+    razlika = 30;
+    prozor_sirina = 305;
+    prozor_visina = 205 + razlika;
+    document.getElementById("polje").style.display = "none";
+    setTimeout("window.resizeTo(prozor_sirina,prozor_visina)", 2000);
+    setTimeout("document.getElementById('polje').style.display='block'", 2001);
+    knjiga_sirina = 300;
+    knjiga_visina = 210;
+    document.getElementById("polje").style.top = 30;
+    setTimeout(
+      "document.getElementById('polje_ispis_lijevo_area').style.display='none'",
+      3300
+    );
+    setTimeout(
+      "document.getElementById('polje_ispis_desno_area').style.display='none'",
+      3301
+    );
+
+    polje_pomak_stanje = "dolje";
+    ispis_mouse_stanje = "false";
+
+    ver_dar_provjera = widget.system("/usr/bin/uname -r", null).outputString;
+    if (ver_dar_provjera.charAt(0) == "8") {
+      document.getElementById("polje_ispis_lijevo_area").style.fontSize =
+        "12px";
+      document.getElementById("polje_ispis_desno_area").style.fontSize = "12px";
+    }
+
+    function polje_pomak(smjer) {
+      if (
+        smjer == "gore" &&
+        document.getElementById("polje").style.top == "30px"
+      ) {
+        document.getElementById("polje").focus();
+        document.getElementById("polje").select();
+        setTimeout("document.getElementById('polje').style.top=30", 25);
+        setTimeout("document.getElementById('polje').style.top=25", 50);
+        setTimeout("document.getElementById('polje').style.top=20", 75);
+        setTimeout("document.getElementById('polje').style.top=15", 100);
+        setTimeout("document.getElementById('polje').style.top=10", 125);
+        setTimeout("polje_pomak_stanje='gore'", 150);
+      }
+      if (
+        smjer == "dolje" &&
+        document.getElementById("polje").style.top == "10px"
+      ) {
+        setTimeout("document.getElementById('polje').style.top=10", 25);
+        setTimeout("document.getElementById('polje').style.top=15", 50);
+        setTimeout("document.getElementById('polje').style.top=20", 75);
+        setTimeout("document.getElementById('polje').style.top=25", 100);
+        setTimeout("document.getElementById('polje').style.top=30", 125);
+        setTimeout("polje_pomak_stanje='dolje'", 150);
+      }
+    }
+
+    function kartoncic_pomak(stanje) {
+      if (stanje == "gore") {
+        document.getElementById("kartoncic").style.top = -10;
+        document.getElementById("polje").style.top = 5;
+      }
+      if (stanje == "dolje") {
+        document.getElementById("kartoncic").style.top = 5;
+        document.getElementById("polje").style.top = 20;
+      }
+    }
+
+    function info_trakica(stanje) {
+      if (document.getElementById("front").style.display == "block") {
+        if (stanje == "pokazi")
+          document.getElementById("info_front").src = "i_slovo.png";
+        if (stanje == "sakrij")
+          document.getElementById("info_front").src = "i_trakica.png";
+      }
+      if (document.getElementById("back").style.display == "block") {
+        if (stanje == "pokazi")
+          document.getElementById("info_back").src = "i_slovo.png";
+        if (stanje == "sakrij")
+          document.getElementById("info_back").src = "i_trakica.png";
+      }
+    }
+
+    okreni = false;
+
+    function okreni_iza() {
+      if (okreni == false) {
+        polje_pomak("dolje");
+        okreni = true;
+        spremi_tekst_lijevo =
+          document.getElementById("polje_ispis_lijevo").innerHTML;
+        spremi_tekst_desno =
+          document.getElementById("polje_ispis_desno").innerHTML;
+        spremi_tekst_lijevo_area = document.getElementById(
+          "polje_ispis_lijevo_area"
+        ).value;
+        spremi_tekst_desno_area = document.getElementById(
+          "polje_ispis_desno_area"
+        ).value;
+        document.getElementById("polje_ispis_lijevo").innerHTML = "";
+        document.getElementById("polje_ispis_desno").innerHTML = "";
+        document.getElementById("polje_ispis_lijevo_area").style.display =
+          "none";
+        document.getElementById("polje_ispis_desno_area").style.display =
+          "none";
+        knjiga_visina_nova = knjiga_visina;
+        prozor_visina_nova = prozor_visina;
+        setTimeout("rastegni()", 125);
+      } else if (okreni == true) {
+        widget.prepareForTransition("ToBack");
+        document.getElementById("front").style.display = "none";
+        document.getElementById("back").style.display = "block";
+        setTimeout("widget.performTransition()", 0);
+        document.getElementById("note").style.display = "none";
+        check_update_now();
+      }
+    }
+
+    function okreni_naprijed() {
+      okreni = false;
+      widget.prepareForTransition("ToBack");
+      document.getElementById("front").style.display = "block";
+      document.getElementById("back").style.display = "none";
+      document.getElementById("front").style.opacity = 1;
+      widget.prepareForTransition("ToFront");
+      setTimeout("widget.performTransition()", 0);
+      setTimeout(
+        "if (polje_visina>150) knjiga_visina_nova=polje_visina+70",
+        1000
+      );
+      setTimeout(
+        "if (polje_visina>150) prozor_visina_nova=polje_visina+50",
+        1001
+      );
+      setTimeout("rastegni()", 1002);
+      setTimeout("polje_pomak('gore')", 1003);
+      setTimeout(
+        "document.getElementById('polje_ispis_lijevo').innerHTML=spremi_tekst_lijevo",
+        1101
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_desno').innerHTML=spremi_tekst_desno",
+        1101
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_lijevo_area').style.display='block'",
+        1102
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_desno_area').style.display='block'",
+        1103
+      );
+    }
+
+    function provjera_unosa() {
+      var key = window.event.keyCode;
+
+      switch (key) {
+        case 32:
+          if (document.getElementById("polje").value != "") return;
+          break;
+        case 352:
+        case 353:
+        case 381:
+        case 382:
+        case 272:
+        case 273:
+        case 268:
+        case 269:
+        case 262:
+        case 263:
+        case 39:
+        case 45:
+        case 8:
+          return;
+          break;
+        default:
+      }
+
+      if (
+        (key > 64 && key < 91) ||
+        (key > 96 && key < 123) ||
+        (key > 47 && key < 58)
+      )
+        return;
+      else window.event.returnValue = null;
+    }
+
+    krug = 0;
+    function trazi() {
+      if (krug == 0) {
+        tekst = document.getElementById("polje").value;
+
+        while (tekst.charAt(0) == " ") tekst = tekst.substr(1);
+        while (tekst.charAt(tekst.length - 1) == " ")
+          tekst = tekst.substr(0, tekst.length - 1);
+        while (tekst.indexOf("  ") >= 0) tekst = tekst.replace(/  /g, " ");
+
+        document.getElementById("polje").value = tekst;
+        if (tekst == "") {
+          document.getElementById("polje").value = "";
+          document.getElementById("polje").focus();
+        } else {
+          krug = 1;
+        }
+      }
+      if (krug == 1) {
+        krug++;
+        nasao = new Array();
+        nasao_lijevo = new Array();
+        nasao_desno = new Array();
+        setTimeout("trazi()", 0);
+      } else if (krug == 2) {
+        krug++;
+
+        document.getElementById("polje_ispis_provjera").innerHTML = tekst;
+
+        var tekstL = "";
+        var tekstU = "";
+
+        for (var i = 0; i < tekst.length; i++) {
+          if (tekst.charAt(i) == "Đ") {
+            tekstL = tekstL + "đ";
+            tekstU = tekstU + "Đ";
+          } else if (tekst.charAt(i) == "đ") {
+            tekstL = tekstL + "đ";
+            tekstU = tekstU + "Đ";
+          } else if (tekst.charAt(i) == "'") {
+            tekstL = tekstL + "''";
+            tekstU = tekstU + "''";
+          } else {
+            tekstL = tekstL + tekst.charAt(i);
+            tekstU = tekstU + tekst.charAt(i);
+          }
+        }
+
+        rjecnik = "";
+
+        podatak = widget.system(
+          "sqlite3 rjecnik.db \"select * from rjecnik where en like '" +
+            tekstL +
+            "' or hr like '" +
+            tekstL +
+            "' or hr like '" +
+            tekstU +
+            "';\"",
+          null
+        ).outputString;
+
+        if (podatak) {
+          rjecnik = podatak;
+          rjecnik = podatak.replace(/ć/g, "ć");
+          rjecnik = podatak.replace(/Ć/g, "Ć");
+          rjecnik = podatak.replace(/č/g, "č");
+          rjecnik = podatak.replace(/Č/g, "Č");
+          rjecnik = podatak.replace(/ž/g, "ž");
+          rjecnik = podatak.replace(/Ž/g, "Ž");
+        }
+
+        setTimeout("trazilica()", 0);
+      } else if (krug == 3) {
+        document.getElementById("polje").select();
+        ispis();
+      }
+    }
+
+    function trazilica() {
+      if (rjecnik == "undefined" || rjecnik == "none" || rjecnik == "")
+        rjecnik = "";
+      else rjecnik = rjecnik.split("\n");
+      document.getElementById("polje_ispis_provjera").innerHTML = rjecnik;
+      for (i = 0; i < rjecnik.length; i++) {
+        prvi_stup = rjecnik[i].substring(0, rjecnik[i].search(/\|/));
+        drugi_stup = rjecnik[i].substring(
+          rjecnik[i].search(/\|/) + 1,
+          rjecnik[i].length
+        );
+
+        nasao_desno.push(prvi_stup);
+        nasao_lijevo.push(drugi_stup);
+      }
+      trazi();
+    }
+
+    function ispis() {
+      krug = 0;
+      document.getElementById("listanje").style.display = "block";
+      setTimeout(
+        "document.getElementById('listanje').style.display='none';",
+        400
+      );
+      if (nasao_lijevo.length > 0) {
+        document.getElementById("polje_ispis_lijevo").innerHTML = "";
+        document.getElementById("polje_ispis_desno").innerHTML = "";
+        for (i = 0; i < nasao_lijevo.length - 1; i++) {
+          document.getElementById("polje_ispis_provjera").innerHTML =
+            nasao_lijevo[i];
+          red_visina_lijevo = document.getElementById(
+            "polje_ispis_provjera"
+          ).offsetHeight;
+          document.getElementById("polje_ispis_provjera").innerHTML =
+            nasao_desno[i];
+          red_visina_desno = document.getElementById(
+            "polje_ispis_provjera"
+          ).offsetHeight;
+          document.getElementById("polje_ispis_lijevo").innerHTML +=
+            nasao_lijevo[i] + "<br>";
+          document.getElementById("polje_ispis_desno").innerHTML +=
+            nasao_desno[i] + "<br>";
+          red_visina_lijevo_razmak = red_visina_lijevo - 14 - 13;
+          red_visina_desno_razmak = red_visina_desno - 14 - 13;
+          if (red_visina_lijevo_razmak > 0) {
+            for (
+              i_razmak = 0;
+              i_razmak < red_visina_lijevo_razmak;
+              i_razmak++
+            ) {
+              document.getElementById("polje_ispis_desno").innerHTML += "<br>";
+            }
+          }
+          if (red_visina_desno_razmak > 0) {
+            for (i_razmak = 0; i_razmak < red_visina_desno_razmak; i_razmak++) {
+              document.getElementById("polje_ispis_lijevo").innerHTML += "<br>";
+            }
+          }
+        }
+        document.getElementById("polje_ispis_lijevo_area").style.display =
+          "block";
+        document.getElementById("polje_ispis_desno_area").style.display =
+          "block";
+        document.getElementById("polje_ispis_lijevo_area").value = document
+          .getElementById("polje_ispis_lijevo")
+          .innerHTML.replace(/<br>/gi, "\n");
+        document.getElementById("polje_ispis_desno_area").value = document
+          .getElementById("polje_ispis_desno")
+          .innerHTML.replace(/<br>/gi, "\n");
+        polje_desno_visina =
+          document.getElementById("polje_ispis_desno").offsetHeight;
+        polje_lijevo_visina =
+          document.getElementById("polje_ispis_lijevo").offsetHeight;
+        document.getElementById("polje_ispis_lijevo_area").style.height =
+          polje_lijevo_visina + 9;
+        document.getElementById("polje_ispis_desno_area").style.height =
+          polje_desno_visina + 9;
+        if (polje_desno_visina > polje_lijevo_visina)
+          polje_visina = polje_desno_visina;
+        else polje_visina = polje_lijevo_visina;
+        document.getElementById("polje_ispis_lijevo").offsetHeight =
+          polje_visina;
+        document.getElementById("polje_ispis_desno").offsetHeight =
+          polje_visina;
+        if (polje_visina > 150) {
+          knjiga_visina_nova = polje_visina + 75;
+          prozor_visina_nova = polje_visina + 55;
+          setTimeout("rastegni();", 200);
+        } else {
+          knjiga_visina_nova = knjiga_visina;
+          prozor_visina_nova = prozor_visina;
+          document.getElementById("polje_ispis_lijevo_area").style.height = 148;
+          document.getElementById("polje_ispis_desno_area").style.height = 148;
+          setTimeout("rastegni();", 200);
+        }
+        trace_nasao = true;
+      } else {
+        trace_nasao = false;
+        setTimeout("nema();", 300);
+
+        knjiga_visina_nova = knjiga_visina;
+        prozor_visina_nova = prozor_visina;
+        setTimeout("rastegni();", 200);
+      }
+      check_update_trazi(tekst, trace_nasao);
+      document.getElementById("polje").disabled = false;
+    }
+
+    function nema() {
+      document.getElementById("polje_ispis_lijevo").innerHTML = "";
+      document.getElementById("polje_ispis_desno").innerHTML = "";
+      document.getElementById("polje_ispis_lijevo_area").value = "";
+      document.getElementById("polje_ispis_desno_area").value = "";
+
+      setTimeout(
+        "document.getElementById('polje_ispis_lijevo').style.left=-10+38-6;",
+        100
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_lijevo').style.left=9+38-6;",
+        150
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_lijevo').style.left=-8+38-6;",
+        200
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_lijevo').style.left=7+38-6;",
+        250
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_lijevo').style.left=-6+38-6;",
+        300
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_lijevo').style.left=5+38-6;",
+        350
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_lijevo').style.left=-4+38-6;",
+        400
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_lijevo').style.left=3+38-6;",
+        450
+      );
+
+      setTimeout(
+        "document.getElementById('polje_ispis_desno').style.left=-10+160-6;",
+        100
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_desno').style.left=9+160-6;",
+        150
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_desno').style.left=-8+160-6;",
+        200
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_desno').style.left=7+160-6;",
+        250
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_desno').style.left=-6+160-6;",
+        300
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_desno').style.left=5+160-6;",
+        350
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_desno').style.left=-4+160-6;",
+        400
+      );
+      setTimeout(
+        "document.getElementById('polje_ispis_desno').style.left=3+160-6;",
+        450
+      );
+
+      setTimeout(
+        "document.getElementById('podloga_front').style.left=-10-3;",
+        100
+      );
+      setTimeout(
+        "document.getElementById('podloga_front').style.left=9-3;",
+        150
+      );
+      setTimeout(
+        "document.getElementById('podloga_front').style.left=-8-3;",
+        200
+      );
+      setTimeout(
+        "document.getElementById('podloga_front').style.left=7-3;",
+        250
+      );
+      setTimeout(
+        "document.getElementById('podloga_front').style.left=-6-3;",
+        300
+      );
+      setTimeout(
+        "document.getElementById('podloga_front').style.left=5-3;",
+        350
+      );
+      setTimeout(
+        "document.getElementById('podloga_front').style.left=-4-3;",
+        400
+      );
+      setTimeout(
+        "document.getElementById('podloga_front').style.left=3-3;",
+        450
+      );
+
+      pomak_pozicija = 140;
+      pomak_polje = "zakrpa_sredina";
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-10-3;",
+        100
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+9-3;",
+        150
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-8-3;",
+        200
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+7-3;",
+        250
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-6-3;",
+        300
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+5-3;",
+        350
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-4-3;",
+        400
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+3-3;",
+        450
+      );
+
+      pomak_pozicija = 0;
+      pomak_polje = "zakrpa_gore";
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-10-3;",
+        100
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+9-3;",
+        150
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-8-3;",
+        200
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+7-3;",
+        250
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-6-3;",
+        300
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+5-3;",
+        350
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-4-3;",
+        400
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+3-3;",
+        450
+      );
+
+      pomak_pozicija = 0;
+      pomak_polje = "zakrpa_dolje";
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-10-3;",
+        100
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+9-3;",
+        150
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-8-3;",
+        200
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+7-3;",
+        250
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-6-3;",
+        300
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+5-3;",
+        350
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "-4-3;",
+        400
+      );
+      setTimeout(
+        "document.getElementById('" +
+          pomak_polje +
+          "').style.left=" +
+          pomak_pozicija +
+          "+3-3;",
+        450
+      );
+
+      setTimeout(
+        "document.getElementById('info_front').style.left=-10+135-3;",
+        100
+      );
+      setTimeout(
+        "document.getElementById('info_front').style.left=9+135-3;",
+        150
+      );
+      setTimeout(
+        "document.getElementById('info_front').style.left=-8+135-3;",
+        200
+      );
+      setTimeout(
+        "document.getElementById('info_front').style.left=7+135-3;",
+        250
+      );
+      setTimeout(
+        "document.getElementById('info_front').style.left=-6+135-3;",
+        300
+      );
+      setTimeout(
+        "document.getElementById('info_front').style.left=5+135-3;",
+        350
+      );
+      setTimeout(
+        "document.getElementById('info_front').style.left=-4+135-3;",
+        400
+      );
+      setTimeout(
+        "document.getElementById('info_front').style.left=3+135-3;",
+        450
+      );
+    }
+
+    broj_koraka = 0;
+    function rastegni() {
+      if (broj_koraka < 10) {
+        broj_koraka++;
+        knjiga_visina_sada = document.getElementById("podloga_front").height;
+        knjiga_visina_korak = (knjiga_visina_nova - knjiga_visina_sada) / 2;
+        document.getElementById("podloga_front").height =
+          knjiga_visina_sada + knjiga_visina_korak;
+        document.getElementById("podloga_front").width = 300;
+        document.getElementById("listanje").height =
+          knjiga_visina_sada + knjiga_visina_korak;
+        document.getElementById("listanje").width = 238;
+        window.resizeTo(
+          prozor_sirina,
+          document.getElementById("podloga_front").height + razlika
+        );
+        odstupanje = (knjiga_visina_sada / 50 - 2) * 2;
+        if (knjiga_visina_sada > 200) odstupanje -= 7;
+        if (knjiga_visina_sada > 300) odstupanje += 7;
+        document.getElementById("zakrpa_lijevo").height =
+          knjiga_visina_sada + knjiga_visina_korak - 68;
+        document.getElementById("zakrpa_lijevo").width = 9;
+        document.getElementById("zakrpa_desno").height =
+          knjiga_visina_sada + knjiga_visina_korak - 68;
+        document.getElementById("zakrpa_desno").width = 9;
+        document.getElementById("zakrpa_sredina").height =
+          knjiga_visina_sada + knjiga_visina_korak - 58;
+        document.getElementById("zakrpa_sredina").width = 18;
+        document.getElementById("zakrpa_dolje").style.top =
+          knjiga_visina_sada + knjiga_visina_korak - 24;
+        if (knjiga_visina_sada > 210) {
+          document.getElementById("info_front").style.top =
+            document.getElementById("podloga_front").height - odstupanje;
+        }
+        setTimeout("rastegni()", 25);
+      } else {
+        document.getElementById("podloga_front").height = knjiga_visina_nova;
+        document.getElementById("listanje").height = knjiga_visina_nova;
+        window.resizeTo(prozor_sirina, knjiga_visina_nova + razlika);
+        if (document.getElementById("podloga_front").height == knjiga_visina)
+          document.getElementById("info_front").style.top = 213;
+        broj_koraka = 0;
+        if (okreni == true) okreni_iza();
+      }
+    }
+
+    document.getElementById("polje").focus();
+
+    if (window.widget) {
+      widget.onhide = onhide;
+    }
+
+    function onhide() {
+      polje_pomak("dolje");
+    }
+
+    function check_update_now() {
+      url = "http://www.kreativni.hr/update.php?id=dictionary&ver=true";
+      check_update();
+    }
+
+    function check_update_onload() {
+      url = "http://www.kreativni.hr/update.php?id=dictionary&trace=ucitavanje";
+      check_update();
+    }
+
+    function check_update_trazi(tekst, trace_nasao) {
+      if (trace_nasao == true) trace_nasao = "&nasao=true";
+      else trace_nasao = "";
+      url =
+        "http://www.kreativni.hr/update.php?id=dictionary&q=" +
+        tekst +
+        trace_nasao;
+      check_update();
+    }
+
+    function check_update() {
+      var xml_request = new XMLHttpRequest();
+      xml_request.onload = function (e) {
+        xml_loaded(event, xml_request);
+      };
+      xml_request.overrideMimeType("text/xml");
+
+      xml_request.open("GET", url);
+
+      xml_request.setRequestHeader("Cache-Control", "no-cache");
+      xml_request.send(null);
+    }
+
+    function xml_loaded(event, request) {
+      ver_check = "?";
+      if (request.status == 200) {
+        ver_this = "1.1";
+        ver_new = request.responseText;
+
+        if (ver_this != ver_new) {
+          ver_check = ver_new;
+          document.getElementById("note").style.display = "block";
+        } else ver_check = ver_this;
+      }
+    }
+  </script>
+</html>
