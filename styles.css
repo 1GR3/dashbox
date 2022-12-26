@@ -102,6 +102,11 @@ body .workarea {
   justify-content: center;
   width: 100%;
   height: calc(100vh - 55px);
+  position: relative;
+}
+body .workarea object {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 /*# sourceMappingURL=styles.css.map */
