@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style>
+      @import "Sticky.css";
+    </style>
+    <!-- <script type="text/javascript" src="sticky.js"></script> -->
+
+    <title>sticky</title>
+  </head>
+  <body onload="load();" onunload="unload();">
+    <div class="sticky" id="sticky_1">
+      <div class="sticky-inner">
+        <div class="front">
+          <textarea>Welcome to <s>dashboard</s> <b>dashbox!</b></textarea>
+          <button class="i">
+            <span>i</span>
+          </button>
+        </div>
+        <div class="back">
+          <div class="row colors">
+            <button class="color"></button>
+            <button class="color"></button>
+            <button class="color"></button>
+            <button class="color"></button>
+            <button class="color"></button>
+            <button class="color"></button>
+            <button class="color"></button>
+            <button class="color"></button>
+            <button class="color"></button>
+            <button class="color"></button>
+          </div>
+          <div class="row font">
+            <span>Font:</span>
+            <select name="family" id="family">
+              <option value="markerfelt">Marker Felt</option>
+              <option value="helvetica">Helvetica</option>
+              <option value="lucidagrande">Lucida Grande</option>
+              <option value="futura">Futura</option>
+              <option value="optima">Optima</option>
+              <option value="gillsans">Gill Sans</option>
+              <option value="baskerville">Baskerville</option>
+              <option value="americantypewriter">American Typewriter</option>
+            </select>
+            <select name="size" id="size">
+              <option value="auto">Auto</option>
+              <option value="auto">10</option>
+              <option value="auto">11</option>
+              <option value="auto">12</option>
+              <option value="auto">13</option>
+              <option value="auto">14</option>
+              <option value="auto">16</option>
+              <option value="auto">18</option>
+            </select>
+          </div>
+          <div class="row panel-footer">
+            <button class="done">
+              <span>Done</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
